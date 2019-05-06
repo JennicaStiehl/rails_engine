@@ -45,6 +45,7 @@ class Merchant < ApplicationRecord
       .where("date_trunc('day', invoices.updated_at)=#{date} ")
       .take
   end
+  
   def revenue(order)
     self.select('merchants.id, merchants.name, sum(invoice_items.unit_price * invoice_items.quantity)as total_revenue')
       .joins(invoices: [:invoice_items, :transactions])
